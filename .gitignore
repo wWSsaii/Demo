@@ -16,3 +16,6 @@ data/*.png
 # OS
 .DS_Store
 Thumbs.db
+
+# Local verification artifacts (Edge headless screenshots etc.)
+qoder-demo/.verify/
