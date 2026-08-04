@@ -1,0 +1,18 @@
+# Build artifacts / old versions
+index.blue-backup.html
+data/data.js
+data.js
+scripts/
+feishu_login_qr.png
+
+# Raw source images (only webp optimized versions are tracked)
+data/*.jpg
+data/*.gif
+data/*.png
+
+# WorkBuddy internal
+.workbuddy/
+
+# OS
+.DS_Store
+Thumbs.db

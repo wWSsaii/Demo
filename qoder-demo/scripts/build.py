@@ -20,6 +20,11 @@ INDEX = os.path.join(BASE, "index.html")
 DATA = os.path.join(BASE, "data", "data.js")
 
 TAG_RE = re.compile(r'\s*<script src="data/data\.js"></script>\s*')
+# 幂等支持：若 index.html 已是内联态（数据已打进 <script> 块），同样可重新构建
+INLINE_RE = re.compile(
+    r'\s*<script>\s*.*?window\.PORTFOLIO_DATA = .*?</script>\s*',
+    re.DOTALL,
+)
 
 def main():
     with open(INDEX, "r", encoding="utf-8") as f:
@@ -32,6 +37,9 @@ def main():
 
     inline = "\n<script>\n" + data_js + "\n</script>\n"
     new_html, n = TAG_RE.subn(inline, html)
+    if n != 1:
+        # 模板态未命中，尝试替换已内联的数据块
+        new_html, n = INLINE_RE.subn(inline, html, count=1)
     if n != 1:
         print(f"[错误] 在 index.html 中找到 {n} 处 data.js 引用（应为 1 处），已中止。")
         sys.exit(1)

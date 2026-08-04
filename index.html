@@ -8,9 +8,615 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+<style>
+/* ============================================================
+   王思羽 · 个人产品展示  —  科技绿主题（内联单文件版）
+   ============================================================ */
+
+:root {
+  --green-50: #ecfdf5;
+  --green-100: #d1fae5;
+  --green-200: #a7f3d0;
+  --green-300: #6ee7b7;
+  --green-400: #34d399;
+  --green-500: #10b981;
+  --green-600: #059669;
+  --green-700: #047857;
+
+  --accent: #34d399;
+  --ink: #0f172a;
+  --muted: #475569;
+  --faint: #94a3b8;
+  --bg: #ffffff;
+  --bg-alt: #f0fdf9;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, .08);
+  --shadow-md: 0 8px 24px rgba(5, 150, 105, .10);
+  --shadow-lg: 0 18px 48px rgba(5, 150, 105, .18);
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --maxw: 1120px;
+  --nav-h: 64px;
+
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --font: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, video { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(18px, 5vw, 40px);
+}
+
+/* ====== 导航 ====== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s var(--ease);
+}
+.nav.is-scrolled { box-shadow: var(--shadow-sm); }
+
+.nav__inner {
+  height: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(18px, 5vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__brand {
+  font-weight: 900;
+  font-size: 1.15rem;
+  letter-spacing: .5px;
+  color: var(--green-700);
+}
+.nav__brand-dot { color: var(--green-400); }
+
+.nav__links { display: flex; gap: clamp(14px, 3vw, 34px); }
+.nav__links a {
+  position: relative;
+  font-weight: 500;
+  font-size: .98rem;
+  color: var(--muted);
+  padding: 6px 2px;
+  transition: color .25s var(--ease);
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: -2px;
+  height: 2px;
+  background: var(--green-500);
+  border-radius: 2px;
+  transition: right .3s var(--ease);
+}
+.nav__links a:hover,
+.nav__links a.is-active { color: var(--green-700); }
+.nav__links a:hover::after,
+.nav__links a.is-active::after { right: 0; }
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px; height: 42px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.nav__toggle span {
+  display: block;
+  height: 2px;
+  width: 22px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+.nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ====== Hero / 简介 ====== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(48px, 9vw, 96px);
+  padding-bottom: clamp(64px, 11vw, 130px);
+  background: linear-gradient(160deg, var(--green-700), var(--green-500) 55%, var(--green-400));
+  color: #fff;
+}
+.hero__bg {
+  position: absolute;
+  inset: -30% -10% auto -10%;
+  height: 160%;
+  background:
+    radial-gradient(40% 55% at 18% 22%, rgba(255,255,255,.22), transparent 60%),
+    radial-gradient(45% 50% at 82% 30%, rgba(255,255,255,.16), transparent 60%),
+    radial-gradient(35% 45% at 60% 85%, rgba(255,255,255,.14), transparent 60%);
+  background-size: 200% 200%;
+  animation: bgFloat 16s var(--ease) infinite alternate;
+  pointer-events: none;
+}
+@keyframes bgFloat {
+  0%   { background-position: 0% 0%, 100% 0%, 50% 100%; }
+  100% { background-position: 30% 40%, 70% 30%, 40% 60%; }
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: center;
+}
+.avatar {
+  width: clamp(96px, 16vw, 148px);
+  height: clamp(96px, 16vw, 148px);
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  font-size: clamp(2.6rem, 7vw, 4rem);
+  font-weight: 900;
+  color: var(--green-700);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 12px 30px rgba(2, 44, 34, .35);
+  border: 3px solid rgba(255, 255, 255, .6);
+}
+.avatar--img { object-fit: cover; padding: 0; line-height: 0; }
+.hero__name {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.hero__title {
+  margin: 6px 0 14px;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, .92);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .35);
+  backdrop-filter: blur(4px);
+}
+.badge::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #bbf7d0;
+  box-shadow: 0 0 0 0 rgba(187, 247, 208, .8);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(187, 247, 208, .7); }
+  70% { box-shadow: 0 0 0 9px rgba(187, 247, 208, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(187, 247, 208, 0); }
+}
+
+.hero__summary {
+  grid-column: 1 / -1;
+  margin: 6px 0 0;
+  max-width: 760px;
+  color: rgba(255, 255, 255, .94);
+  font-size: clamp(.95rem, 2vw, 1.05rem);
+}
+
+.hero__stats {
+  grid-column: 1 / -1;
+  margin-top: clamp(20px, 4vw, 34px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.stat {
+  background: rgba(255, 255, 255, .14);
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform .3s var(--ease), background .3s var(--ease);
+}
+.stat:hover { transform: translateY(-4px); background: rgba(255, 255, 255, .22); }
+.stat__value {
+  font-size: clamp(1.3rem, 3.4vw, 1.85rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+.stat__label { font-size: .82rem; color: rgba(255, 255, 255, .85); margin-top: 4px; }
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: 26px; height: 42px;
+  border: 2px solid rgba(255, 255, 255, .6);
+  border-radius: 16px;
+  display: grid;
+  place-items: start center;
+  padding-top: 7px;
+}
+.hero__scroll-dot {
+  width: 4px; height: 9px;
+  border-radius: 4px;
+  background: #fff;
+  animation: scrollDot 1.8s var(--ease) infinite;
+}
+@keyframes scrollDot {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(14px); opacity: .2; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ====== 通用 Section ====== */
+.section { padding: clamp(56px, 9vw, 104px) 0; }
+.section--alt { background: var(--bg-alt); }
+.section__head { max-width: 720px; margin-bottom: clamp(28px, 5vw, 48px); }
+.section__kicker {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--green-600);
+  margin-bottom: 8px;
+}
+.section__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.section__sub { margin: 10px 0 0; color: var(--muted); font-size: 1rem; }
+
+/* ====== 项目卡片 ====== */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: clamp(18px, 3vw, 28px);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--green-200);
+}
+.card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--green-50);
+  overflow: hidden;
+}
+.card__media img,
+.card__media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--ease);
+}
+.card:hover .card__media img,
+.card:hover .card__media video { transform: scale(1.06); }
+.card__media-placeholder {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  color: var(--green-600);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--green-50), var(--green-100));
+}
+.card__period {
+  position: absolute;
+  top: 12px; left: 12px;
+  padding: 4px 10px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(5, 150, 105, .9);
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+.card__more {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  padding: 5px 11px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--green-700);
+  background: rgba(255, 255, 255, .92);
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.card:hover .card__more { opacity: 1; transform: translateY(0); }
+
+.card__body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.card__name { margin: 0; font-size: 1.12rem; font-weight: 700; line-height: 1.4; }
+.card__role { margin: 0; font-size: .85rem; color: var(--green-600); font-weight: 600; }
+.card__desc { margin: 0; color: var(--muted); font-size: .92rem; }
+.card__tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-size: .76rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--green-700);
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.card:hover .tag { background: var(--green-100); }
+.card__metrics {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+.metric { flex: 1; text-align: center; }
+.metric__value { font-size: 1.05rem; font-weight: 900; color: var(--green-700); }
+.metric__label { font-size: .74rem; color: var(--faint); }
+
+/* ====== 技能 ====== */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+}
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.skill-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.skill-card__head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.skill-card__icon {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  display: grid; place-items: center;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+.skill-card__cat { margin: 0; font-size: 1.05rem; font-weight: 700; }
+.skill-card__items { display: flex; flex-wrap: wrap; gap: 9px; }
+.skill-card__items .tag {
+  cursor: default;
+  font-size: .82rem;
+  padding: 6px 12px;
+  transition: transform .25s var(--ease), background .25s var(--ease);
+}
+.skill-card__items .tag:hover { transform: translateY(-3px); background: var(--green-500); color: #fff; border-color: var(--green-500); }
+
+/* ====== 联系方式（隐私脱敏：联系方式运行时解码） ====== */
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.contact-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--green-200); }
+.contact-card__icon {
+  flex: none;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: 1.3rem;
+}
+.contact-card__meta { min-width: 0; }
+.contact-card__label { font-size: .8rem; color: var(--faint); }
+.contact-card__value {
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.contact-card__copy {
+  margin-left: auto;
+  flex: none;
+  border: 1px solid var(--green-200);
+  background: var(--green-50);
+  color: var(--green-700);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.contact-card__copy:hover { background: var(--green-500); color: #fff; border-color: var(--green-500); }
+.contact-card__copy.is-done { background: var(--green-600); color: #fff; border-color: var(--green-600); }
+.contact__avail {
+  margin-top: 22px;
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ====== 页脚 ====== */
+.footer {
+  background: var(--green-700);
+  color: rgba(255, 255, 255, .9);
+  text-align: center;
+  padding: 26px 18px;
+  font-size: .9rem;
+}
+
+/* ====== 灯箱 ====== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 4vw, 40px);
+}
+.lightbox[hidden] { display: none; }
+.lightbox__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(8, 28, 22, .82);
+  backdrop-filter: blur(4px);
+  animation: fadeIn .3s var(--ease);
+}
+.lightbox__panel {
+  position: relative;
+  width: min(960px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  animation: popIn .35s var(--ease);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+.lightbox__close {
+  position: absolute; top: 12px; right: 12px;
+  z-index: 2;
+  width: 38px; height: 38px;
+  border: none; border-radius: 50%;
+  background: rgba(255, 255, 255, .9);
+  color: var(--ink);
+  font-size: 1.5rem; line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.lightbox__stage { background: var(--green-50); }
+.lightbox__stage img,
+.lightbox__stage video { width: 100%; max-height: 62vh; object-fit: contain; background: #06231a; }
+.lightbox__bar { padding: 20px 24px 26px; }
+.lightbox__bar h3 { margin: 0 0 4px; font-size: 1.2rem; }
+.lightbox__bar .role { margin: 0 0 12px; color: var(--green-600); font-weight: 600; font-size: .9rem; }
+.lightbox__bar p { margin: 0 0 12px; color: var(--muted); }
+.lightbox__bar ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.lightbox__bar li { margin: 6px 0; }
+.lightbox__thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.lightbox__thumbs button {
+  width: 64px; height: 44px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0; cursor: pointer;
+  background: var(--green-100);
+}
+.lightbox__thumbs button.is-active { border-color: var(--green-600); }
+.lightbox__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ====== 滚动渐显 ====== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .08s; }
+.reveal[data-delay="2"] { transition-delay: .16s; }
+.reveal[data-delay="3"] { transition-delay: .24s; }
+.reveal[data-delay="4"] { transition-delay: .32s; }
+
+/* ====== 响应式 ====== */
+@media (max-width: 860px) {
+  .nav__toggle { display: flex; }
+  .nav__links {
+    position: absolute;
+    top: var(--nav-h); left: 0; right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s var(--ease);
+  }
+  .nav.is-open .nav__links { max-height: 280px; }
+  .nav__links a { padding: 15px clamp(18px, 5vw, 40px); border-top: 1px solid var(--border); }
+  .nav__links a::after { display: none; }
+}
+
+@media (max-width: 720px) {
+  .hero__inner { grid-template-columns: 1fr; text-align: left; }
+  .hero__stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 460px) {
+  .projects__grid { grid-template-columns: 1fr; }
+  .hero__stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ====== 降低动效偏好 ====== */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .card:hover, .skill-card:hover, .contact-card:hover, .stat:hover { transform: none; }
+}
+</style>
 </head>
 <body>
+
   <!-- 顶部导航 -->
   <header class="nav" id="nav">
     <div class="nav__inner">
@@ -31,7 +637,7 @@
     <!-- 个人简介 / Hero -->
     <section id="hero" class="hero">
       <div class="hero__bg" aria-hidden="true"></div>
-      <div class="container hero__inner" id="heroContent"><!-- JS 渲染 --></div>
+      <div class="container hero__inner" id="heroContent"></div>
       <a class="hero__scroll" href="#projects" data-scroll aria-label="向下滚动">
         <span class="hero__scroll-dot"></span>
       </a>
@@ -45,7 +651,7 @@
           <h2 class="section__title">项目展示</h2>
           <p class="section__sub">从 AI 智能体到 0→1 校园产品，覆盖工作流落地与增长运营。</p>
         </header>
-        <div class="projects__grid" id="projectsGrid"><!-- JS 渲染 --></div>
+        <div class="projects__grid" id="projectsGrid"></div>
       </div>
     </section>
 
@@ -57,7 +663,7 @@
           <h2 class="section__title">技能亮点</h2>
           <p class="section__sub">产品落地 · AI 能力 · 数据运营 · 方法论 四位一体。</p>
         </header>
-        <div class="skills__grid" id="skillsGrid"><!-- JS 渲染 --></div>
+        <div class="skills__grid" id="skillsGrid"></div>
       </div>
     </section>
 
@@ -69,12 +675,12 @@
           <h2 class="section__title">联系方式</h2>
           <p class="section__sub">欢迎就 AI 产品 / 实习机会与我交流。</p>
         </header>
-        <div id="contactWrap"><!-- JS 渲染 --></div>
+        <div id="contactWrap"></div>
       </div>
     </section>
   </main>
 
-  <footer class="footer" id="footer"><!-- JS 渲染 --></footer>
+  <footer class="footer" id="footer"></footer>
 
   <!-- 灯箱 -->
   <div class="lightbox" id="lightbox" hidden aria-hidden="true">
@@ -86,6 +692,336 @@
     </div>
   </div>
 
-  <script src="assets/main.js"></script>
+<script>
+/* ============================================================
+   王思羽 · 个人产品展示  —  渲染与交互（内联单文件版）
+   数据已内联，无需 fetch 外部文件
+   敏感信息经编码存储，运行时解码显示
+   ============================================================ */
+(function () {
+  "use strict";
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const esc = (s) =>
+    String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  const tagsHTML = (arr) =>
+    (arr || []).map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+
+  const metricsHTML = (arr) =>
+    (arr || [])
+      .map(
+        (m) =>
+          `<div class="metric"><div class="metric__value">${esc(m.value)}</div><div class="metric__label">${esc(m.label)}</div></div>`
+      )
+      .join("");
+
+  /* ---------- 隐私解码：简单 XOR + Base64 ----------
+     手机号和邮箱在源码中不以明文出现，
+     运行时解码后才渲染到 DOM。 */
+  function decode(s) {
+    try {
+      const b = atob(s);
+      let r = "";
+      for (let i = 0; i < b.length; i++) r += String.fromCharCode(b.charCodeAt(i) ^ 0x1A);
+      return r;
+    } catch (_) { return s; }
+  }
+
+  /* ==================== 内联数据 ==================== */
+  var DATA = {"profile":{"name":"王思羽","title":"AI 产品运营（AI 应用方向） ｜ AI 产品助理","avatar":"data/web/avatar.webp","age":"22 岁","availability":"立即到岗 · 可全职实习 6 个月+","education":"海南师范大学 · 数据科学与大数据技术 · 本科（2027 届）","educationPeriod":"2023.09 – 2027.06","courses":["机器学习","自然语言处理（NLP）","数据可视化","Python","SQL"],"summary":"具备「AI 工作流落地 + 产品 0→1 搭建 + 数据驱动运营」复合能力，可独立完成痛点洞察 → 需求拆解 → AI 方案设计 → 上线迭代全流程。熟练运用 Coze、Prompt 工程、多智能体协作、知识库搭建，落地可量化 AI 提效成果（11 节点自动化工作流、120 份知识文档、30 万+ 播放内容分析）。拥有用户增长与商业化实战经验，沉淀 500+ 注册用户、40 万+ 内容播放、达成 10+ 商家合作。","stats":[{"value":"500+","label":"注册用户"},{"value":"40万+","label":"内容播放"},{"value":"11 节点","label":"自动化工作流"},{"value":"120 份","label":"知识库文档"}],"contact":{"_p":"FBAVQUG1DFFYEUJ0EZZVkNVk","_e":"XhhgZTU4MTkwMUBxcS5jb20=","github":"wWSsaii","githubUrl":"https://github.com/wWSsaii"}},"projects":[{"id":"haixiaozhi","name":"海小智 · 新生入学导航 AI 问答智能体","period":"2026.07","role":"创建者 / 需求分析 · 知识库运营 · 部署跟进","media":{"type":"image","src":"data/web/haixiaozhi-demo.webp"},"description":"针对新生入学大量重复咨询（宿舍 / 食堂 / 教务等）痛点，设计 10 大类分层知识库架构，搭建可对话的入学导航 AI 智能体，显著降低人工解答成本。","highlights":["借助元宝对接微信生态 + IMA Claw 多智能体协作批量生产分类知识文档，统一 Prompt 约束输出规范","沉淀「开源参考 → 多 Agent 协同 → 人工校验 → 平台部署」标准化 SOP，累计生成 120 份分类 Markdown 文档、75 条结构化 Q&A","用 Python 脚本生成可视化互动地图并部署 GitHub Pages，解决纯文本问答无法承载的导航需求"],"tags":["知识库构建","多智能体协作","可视化地图","Prompt 工程"],"metrics":[{"value":"120 份","label":"分类文档"},{"value":"75 条","label":"结构化 Q&A"},{"value":"10 类","label":"知识分层"}]},{"id":"ipaoxiaoyuan","name":"i 跑校园 · 校园综合服务小程序","period":"2024.10 – 2025.09","role":"创始人 / 产品规划 · 用户运营 · 商务合作","media":{"type":"gallery","src":["data/web/campus-01.webp","data/web/campus-02.webp","data/web/campus-03.webp","data/web/campus-04.webp","data/web/campus-05.webp","data/web/campus-06.webp","data/web/campus-07.webp","data/web/campus-08.webp","data/web/campus-09.webp","data/web/campus-10.webp","data/web/campus-11.webp"]},"description":"0→1 主导搭建校园综合服务小程序，统筹产品规划、需求迭代、营销推广、用户运营、商务合作全链路，构建丰富校园服务生态。","highlights":["按「高频刚需打底、低频高毛利增收」搭建三层结构：基础流量层（快递代取 / 论文）、增值服务层（技能墙）、电商变现层（零食团购 / 流量卡）","短视频引流至私域社群获取种子用户，对接 10+ 校园周边商家达成流量互推与资源置换，跑通「内容获客 → 社群留存 → 平台交易」增长闭环","探索外链 API 绕开原生限制实现跨小程序跳转；配置飞书 Webhook 机器人实现订单实时推送"],"tags":["0→1 产品","用户增长","商务合作","私域运营"],"metrics":[{"value":"500+","label":"注册用户"},{"value":"60+","label":"接单员"},{"value":"3000 元","label":"总交易额"}]},{"id":"coze-workflow","name":"Coze 短视频分析自动化工作流","period":"2026.07","role":"工作流开发者 / 编排 · Prompt · 数据标准化","media":{"type":"image","src":"data/web/workflow-demo.webp"},"description":"搭建 11 节点 Coze 工作流，打通「视频采集 → ASR 语音转写 → 爆款分析 → 飞书多维表格入库」全链路，解决竞品素材人工整理效率低的痛点。","highlights":["设计前置过滤规则（大模型识别无效视频），降低算力消耗","2 套 Prompt 框架（黄金 3 秒文案改写、爆款多维拆解），输出 17 项标准字段，入库数据可直接支撑运营分析与选题决策","量化节点耗时（ASR≈22s / 改写≈35s / 分析≈31s）与系统性排错方法论，保障流程稳定运行"],"tags":["Coze 编排","Prompt 工程","流程自动化","飞书多维表格"],"metrics":[{"value":"11 节点","label":"自动化链路"},{"value":"17 项","label":"标准字段"},{"value":"≈88s","label":"单条耗时"}]},{"id":"campus-ip","name":"校园类个人 IP 短视频矩阵","period":"2024.08 – 至今","role":"独立创作者 / 内容策划 · 数据分析 · 竞品对标","media":{"type":"video","src":"data/校园宣传.mp4"},"description":"全平台运营校园类个人 IP 短视频矩阵，依托后台数据复盘内容表现、归因优化选题，并引导公域流量沉淀至私域社群支撑后续转化。","highlights":["全平台 40 万+ 播放、产出 30+ 篇内容，依托后台数据复盘内容表现并归因优化选题","跟踪对标竞品，拆解爆款规律沉淀可复用内容框架","引导公域流量沉淀至私域社群，支撑后续转化"],"tags":["内容策划","数据分析","竞品对标","私域沉淀"],"metrics":[{"value":"40万+","label":"全平台播放"},{"value":"30+","label":"内容产出"},{"value":"全平台","label":"矩阵覆盖"}]},{"id":"campus-card","name":"校园卡销售","period":"2024.09","role":"团队负责人 / 获客 · 团队管理 · SOP 培训","media":{"type":"image","src":"data/web/chatgpt.webp"},"description":"通过短视频引流至私域精准获客，组建并管理推广团队，沉淀标准化转化话术 SOP 并培训推广。","highlights":["短视频引流至私域精准获客，单日个人成交 10 单（排名第一）","组建并管理 20+ 人团队，沉淀 10+ 条转化话术 SOP 并培训推广"],"tags":["团队管理","转化 SOP","私域获客"],"metrics":[{"value":"10 单","label":"单日成交"},{"value":"20+","label":"团队规模"},{"value":"10+","label":"转化 SOP"}]}],"skills":{"groups":[{"category":"产品落地","items":["0→1 产品落地","Coze 工作流编排","AI 产品落地 SOP","需求拆解"]},{"category":"AI 能力","items":["Prompt 工程","知识库构建","多智能体协作","飞书多维表格","WorkBuddy + 飞书 CLI"]},{"category":"数据运营","items":["运营数据分析","竞品对标分析","流程自动化","Python（Pandas / Numpy）数据处理"]},{"category":"AI 产品方法论","items":["多模型定方案 → 需求清单 → AI 初稿 → 评审迭代 → 本地 Agent 计划模式落地"]}]},"contact":{"_p":"FBAVQUG1DFFYEUJ0EZZVkNVk","_e":"XhhgZTU4MTkwMUBxcS5jb20=","github":"wWSsaii","githubUrl":"https://github.com/wWSsaii","availability":"立即到岗 · 可全职实习 6 个月+"},"footer":"© 2026 王思羽 · 个人产品展示 · Built with GitHub Pages"};
+
+  /* 解码隐私字段 */
+  DATA.profile.contact.phone = decode(DATA.profile.contact._p);
+  DATA.profile.contact.email = decode(DATA.profile.contact._e);
+  DATA.contact.phone = decode(DATA.contact._p);
+  DATA.contact.email = decode(DATA.contact._e);
+
+  /* ---------------- 渲染：Hero / 简介 ---------------- */
+  function renderHero(p) {
+    const stats = (p.stats || [])
+      .map((s) =>
+        `<div class="stat reveal" data-delay="${Math.min(p.stats.indexOf(s) + 1, 4)}"><div class="stat__value">${esc(s.value)}</div><div class="stat__label">${esc(s.label)}</div></div>`
+      )
+      .join("");
+
+    const avatarHTML = p.avatar
+      ? `<img class="avatar avatar--img reveal" src="${esc(p.avatar)}" alt="${esc(p.name)}" />`
+      : `<div class="avatar reveal">${esc(p.name.charAt(0))}</div>`;
+    $("#heroContent").innerHTML =
+      avatarHTML +
+      `<div class="reveal" data-delay="1">
+        <h1 class="hero__name">${esc(p.name)}</h1>
+        <p class="hero__title">${esc(p.title)}</p>
+        <span class="badge">${esc(p.availability)}</span>
+      </div>
+      <p class="hero__summary reveal" data-delay="2">${esc(p.summary)}</p>
+      <div class="hero__stats">${stats}</div>`;
+  }
+
+  /* ---------------- 渲染：项目 ---------------- */
+  function mediaCover(media) {
+    if (!media) return '<div class="card__media-placeholder">项目预览</div>';
+    if (media.type === "gallery") {
+      const first = Array.isArray(media.src) ? media.src[0] : "";
+      return `<img src="${esc(first)}" alt="项目预览" loading="lazy" />`;
+    }
+    if (media.type === "video") return '<div class="card__media-placeholder">▶ 宣传视频</div>';
+    return `<img src="${esc(media.src)}" alt="项目预览" loading="lazy" />`;
+  }
+
+  function renderProjects(projects) {
+    const grid = $("#projectsGrid");
+    grid.innerHTML = projects
+      .map((pr, i) =>
+        `<article class="card reveal" data-delay="${(i % 4) + 1}" data-id="${esc(pr.id)}" tabindex="0" role="button" aria-label="查看 ${esc(pr.name)}">
+          <div class="card__media">${mediaCover(pr.media)}
+            <span class="card__period">${esc(pr.period)}</span>
+            <span class="card__more">查看详情 →</span>
+          </div>
+          <div class="card__body">
+            <h3 class="card__name">${esc(pr.name)}</h3>
+            <p class="card__role">${esc(pr.role)}</p>
+            <p class="card__desc">${esc(pr.description)}</p>
+            <div class="card__tags">${tagsHTML(pr.tags)}</div>
+            <div class="card__metrics">${metricsHTML(pr.metrics)}</div>
+          </div>
+        </article>`
+      )
+      .join("");
+
+    $$(".card", grid).forEach((card) => {
+      const open = () => openLightbox(projects.find((p) => p.id === card.dataset.id));
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+    });
+  }
+
+  /* ---------------- 渲染：技能 ---------------- */
+  function renderSkills(skills) {
+    const groups = (skills.groups || []).map((g, i) =>
+      `<div class="skill-card reveal" data-delay="${(i % 4) + 1}">
+        <div class="skill-card__head">
+          <div class="skill-card__icon">${esc(g.category.charAt(0))}</div>
+          <h3 class="skill-card__cat">${esc(g.category)}</h3>
+        </div>
+        <div class="skill-card__items">${tagsHTML(g.items)}</div>
+      </div>`
+    );
+    $("#skillsGrid").innerHTML = groups.join("");
+  }
+
+  /* ---------------- 渲染：联系方式（使用解码后的值） ---------------- */
+  function renderContact(c) {
+    const phone = c.phone || "";
+    const email = c.email || "";
+
+    const cards = [
+      { icon: "\uD83D\uDCF1", label: "电话", value: phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2"), copy: phone },
+      { icon: "\u2709\uFE0F", label: "邮箱", value: email.replace(/(.{3}).*(@)/, "$1***$2"), copy: email },
+      { icon: "\uD83D\uDC31", label: "GitHub", value: c.github, copy: c.githubUrl, href: c.githubUrl },
+    ];
+
+    const cardHTML = cards.map((x) =>
+      `<div class="contact-card reveal">
+        <div class="contact-card__icon">${x.icon}</div>
+        <div class="contact-card__meta">
+          <div class="contact-card__label">${esc(x.label)}</div>
+          ${
+            x.href
+              ? `<a class="contact-card__value" href="${esc(x.href)}" target="_blank" rel="noopener">${esc(x.value)}</a>`
+              : `<div class="contact-card__value">${esc(x.value)}</div>`
+          }
+        </div>
+        <button class="contact-card__copy" data-copy="${esc(x.copy)}">复制</button>
+      </div>`
+    ).join("");
+
+    $("#contactWrap").innerHTML =
+      `<div class="contact__grid">${cardHTML}</div>
+       <div class="contact__avail reveal">
+         <span class="badge">${esc(c.availability)}</span>
+         <span style="color:var(--muted);font-size:.92rem">期待 AI 产品 / 实习机会的合作与交流。</span>
+       </div>`;
+
+    $$(".contact-card__copy", $("#contactWrap")).forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = btn.dataset.copy;
+        try { await navigator.clipboard.writeText(text); }
+        catch (e) {
+          const ta = document.createElement("textarea");
+          ta.value = text; document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (_) {}
+          document.body.removeChild(ta);
+        }
+        const old = btn.textContent;
+        btn.textContent = "已复制 ✓";
+        btn.classList.add("is-done");
+        setTimeout(() => { btn.textContent = old; btn.classList.remove("is-done"); }, 1600);
+      });
+    });
+  }
+
+  function renderFooter(text) {
+    $("#footer").textContent = text || "\u00A9 2026 \u738B\u601D\u7FBD \u00B7 \u4E2A\u4EBA\u4EA7\u54C1\u5C55\u793A";
+  }
+
+  /* ---------------- 灯箱 ---------------- */
+  var lbState = { list: [], index: 0 };
+
+  function mediaList(pr) {
+    var m = pr.media;
+    if (!m) return [];
+    if (m.type === "gallery") return (Array.isArray(m.src) ? m.src : [m.src]).map(function (s) { return { type: "image", src: s }; });
+    return [{ type: m.type, src: m.src }];
+  }
+
+  function renderStage() {
+    var stage = $("#lightboxStage");
+    var item = lbState.list[lbState.index];
+    if (!item) return;
+    if (item.type === "video") {
+      stage.innerHTML = '<video src="' + esc(item.src) + '" controls autoplay playsinline></video>';
+    } else {
+      stage.innerHTML = '<img src="' + esc(item.src) + '" alt="\u9884\u89C8" />';
+    }
+    var bar = $("#lightboxBar");
+    var pr = lbState.project;
+    var thumbs = "";
+    if (lbState.list.length > 1) {
+      thumbs = '<div class="lightbox__thumbs">' +
+        lbState.list.map(function (it, i) {
+          return '<button class="' + (i === lbState.index ? "is-active" : "") + '" data-go="' + i + '"><img src="' + esc(it.src) + '" alt="\u7F29\u7565\u56FE" /></button>';
+        }).join("") +
+        '</div>';
+    }
+    var hl = (pr.highlights || []).map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("");
+    bar.innerHTML =
+      "<h3>" + esc(pr.name) + "</h3>" +
+      '<p class="role">' + esc(pr.role) + " \u00B7 " + esc(pr.period) + "</p>" +
+      "<p>" + esc(pr.description) + "</p><ul>" + hl + "</ul>" + thumbs;
+
+    $$("[data-go]", bar).forEach(function (b) {
+      b.addEventListener("click", function () { lbState.index = Number(b.dataset.go); renderStage(); });
+    });
+  }
+
+  function openLightbox(pr) {
+    lbState = { list: mediaList(pr), index: 0, project: pr };
+    if (!lbState.list.length) return;
+    var box = $("#lightbox");
+    box.hidden = false;
+    box.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    renderStage();
+  }
+
+  function closeLightbox() {
+    var box = $("#lightbox");
+    box.hidden = true;
+    box.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    $("#lightboxStage").innerHTML = "";
+  }
+
+  function setupLightbox() {
+    var box = $("#lightbox");
+    $$("[data-close]", box).forEach(function (b) { b.addEventListener("click", closeLightbox); });
+    document.addEventListener("keydown", function (e) {
+      if (box.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight" && lbState.list.length > 1) { lbState.index = (lbState.index + 1) % lbState.list.length; renderStage(); }
+      if (e.key === "ArrowLeft" && lbState.list.length > 1) { lbState.index = (lbState.index - 1 + lbState.list.length) % lbState.list.length; renderStage(); }
+    });
+  }
+
+  /* ---------------- 滚动渐显 ---------------- */
+  function setupReveal() {
+    var items = $$(".reveal");
+    if (!("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("is-visible"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------------- 导航：滚动监听 / 汉堡 / 平滑滚动 ---------------- */
+  function setupNav() {
+    var nav = $("#nav");
+    var toggle = $("#navToggle");
+    var links = $("#navLinks");
+    var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 64;
+
+    var sections = ["hero", "projects", "skills", "contact"]
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    var linkMap = {};
+    $$("a", links).forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      linkMap[id] = a;
+    });
+
+    var onScroll = function () {
+      nav.classList.toggle("is-scrolled", window.scrollY > 10);
+      var current = "";
+      sections.forEach(function (sec) {
+        if (window.scrollY >= sec.offsetTop - navH - 20) current = sec.id;
+      });
+      Object.values(linkMap).forEach(function (a) { a.classList.remove("is-active"); });
+      if (linkMap[current]) linkMap[current].classList.add("is-active");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    $$("a[data-scroll]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var id = a.getAttribute("href").slice(1);
+        var target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        var y = target.getBoundingClientRect().top + window.scrollY - navH + 1;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /* ---------------- 启动（直接用内联数据，无需 fetch） ---------------- */
+  function init() {
+    renderHero(DATA.profile);
+    renderProjects(DATA.projects);
+    renderSkills(DATA.skills);
+    renderContact(DATA.contact);
+    renderFooter(DATA.footer);
+
+    setupLightbox();
+    setupNav();
+    setupReveal();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>
