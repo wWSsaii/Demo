@@ -1,0 +1,164 @@
+{
+  "profile": {
+    "name": "王思羽",
+    "title": "AI 产品运营（AI 应用方向） ｜ AI 产品助理",
+    "avatar": "data/web/avatar.webp",
+    "age": "22 岁",
+    "availability": "立即到岗 · 可全职实习 6 个月+",
+    "education": "海南师范大学 · 数据科学与大数据技术 · 本科（2027 届）",
+    "educationPeriod": "2023.09 – 2027.06",
+    "courses": ["机器学习", "自然语言处理（NLP）", "数据可视化", "Python", "SQL"],
+    "summary": "具备「AI 工作流落地 + 产品 0→1 搭建 + 数据驱动运营」复合能力，可独立完成痛点洞察 → 需求拆解 → AI 方案设计 → 上线迭代全流程。熟练运用 Coze、Prompt 工程、多智能体协作、知识库搭建，落地可量化 AI 提效成果（11 节点自动化工作流、120 份知识文档、30 万+ 播放内容分析）。拥有用户增长与商业化实战经验，沉淀 500+ 注册用户、40 万+ 内容播放、达成 10+ 商家合作。",
+    "stats": [
+      { "value": "500+", "label": "注册用户" },
+      { "value": "40万+", "label": "内容播放" },
+      { "value": "11 节点", "label": "自动化工作流" },
+      { "value": "120 份", "label": "知识库文档" }
+    ],
+    "contact": {
+      "phone": "17786939495",
+      "email": "2788191560@qq.com",
+      "github": "wWSsaii",
+      "githubUrl": "https://github.com/wWSsaii"
+    }
+  },
+  "projects": [
+    {
+      "id": "haixiaozhi",
+      "name": "海小智 · 新生入学导航 AI 问答智能体",
+      "period": "2026.07",
+      "role": "创建者 / 需求分析 · 知识库运营 · 部署跟进",
+      "media": { "type": "image", "src": "data/web/haixiaozhi-demo.webp" },
+      "description": "针对新生入学大量重复咨询（宿舍 / 食堂 / 教务等）痛点，设计 10 大类分层知识库架构，搭建可对话的入学导航 AI 智能体，显著降低人工解答成本。",
+      "highlights": [
+        "借助元宝对接微信生态 + IMA Claw 多智能体协作批量生产分类知识文档，统一 Prompt 约束输出规范",
+        "沉淀「开源参考 → 多 Agent 协同 → 人工校验 → 平台部署」标准化 SOP，累计生成 120 份分类 Markdown 文档、75 条结构化 Q&A",
+        "用 Python 脚本生成可视化互动地图并部署 GitHub Pages，解决纯文本问答无法承载的导航需求"
+      ],
+      "tags": ["知识库构建", "多智能体协作", "可视化地图", "Prompt 工程"],
+      "metrics": [
+        { "value": "120 份", "label": "分类文档" },
+        { "value": "75 条", "label": "结构化 Q&A" },
+        { "value": "10 类", "label": "知识分层" }
+      ]
+    },
+    {
+      "id": "ipaoxiaoyuan",
+      "name": "i 跑校园 · 校园综合服务小程序",
+      "period": "2024.10 – 2025.09",
+      "role": "创始人 / 产品规划 · 用户运营 · 商务合作",
+      "media": {
+        "type": "gallery",
+        "src": [
+          "data/web/campus-01.webp",
+          "data/web/campus-02.webp",
+          "data/web/campus-03.webp",
+          "data/web/campus-04.webp",
+          "data/web/campus-05.webp",
+          "data/web/campus-06.webp",
+          "data/web/campus-07.webp",
+          "data/web/campus-08.webp",
+          "data/web/campus-09.webp",
+          "data/web/campus-10.webp",
+          "data/web/campus-11.webp"
+        ]
+      },
+      "description": "0→1 主导搭建校园综合服务小程序，统筹产品规划、需求迭代、营销推广、用户运营、商务合作全链路，构建丰富校园服务生态。",
+      "highlights": [
+        "按「高频刚需打底、低频高毛利增收」搭建三层结构：基础流量层（快递代取 / 论坛）、增值服务层（技能墙）、电商变现层（零食团购 / 流量卡）",
+        "短视频引流至私域社群获取种子用户，对接 10+ 校园周边商家达成流量互推与资源置换，跑通「内容获客 → 社群留存 → 平台交易」增长闭环",
+        "探索外链 API 绕开原生限制实现跨小程序跳转；配置飞书 Webhook 机器人实现订单实时推送"
+      ],
+      "tags": ["0→1 产品", "用户增长", "商务合作", "私域运营"],
+      "metrics": [
+        { "value": "500+", "label": "注册用户" },
+        { "value": "60+", "label": "接单员" },
+        { "value": "3000 元", "label": "总交易额" }
+      ]
+    },
+    {
+      "id": "coze-workflow",
+      "name": "Coze 短视频分析自动化工作流",
+      "period": "2026.07",
+      "role": "工作流开发者 / 编排 · Prompt · 数据标准化",
+      "media": { "type": "image", "src": "data/web/workflow-demo.webp" },
+      "description": "搭建 11 节点 Coze 工作流，打通「视频采集 → ASR 语音转写 → 爆款分析 → 飞书多维表格入库」全链路，解决竞品素材人工整理效率低的痛点。",
+      "highlights": [
+        "设计前置过滤规则（大模型识别无效视频），降低算力消耗",
+        "2 套 Prompt 框架（黄金 3 秒文案改写、爆款多维拆解），输出 17 项标准字段，入库数据可直接支撑运营分析与选题决策",
+        "量化节点耗时（ASR≈22s / 改写≈35s / 分析≈31s）与系统性排错方法论，保障流程稳定运行"
+      ],
+      "tags": ["Coze 编排", "Prompt 工程", "流程自动化", "飞书多维表格"],
+      "metrics": [
+        { "value": "11 节点", "label": "自动化链路" },
+        { "value": "17 项", "label": "标准字段" },
+        { "value": "≈88s", "label": "单条耗时" }
+      ]
+    },
+    {
+      "id": "campus-ip",
+      "name": "校园类个人 IP 短视频矩阵",
+      "period": "2024.08 – 至今",
+      "role": "独立创作者 / 内容策划 · 数据分析 · 竞品对标",
+      "media": { "type": "video", "src": "data/校园宣传.mp4" },
+      "description": "全平台运营校园类个人 IP 短视频矩阵，依托后台数据复盘内容表现、归因优化选题，并引导公域流量沉淀至私域社群支撑后续转化。",
+      "highlights": [
+        "全平台 40 万+ 播放、产出 30+ 篇内容，依托后台数据复盘内容表现并归因优化选题",
+        "跟踪对标竞品，拆解爆款规律沉淀可复用内容框架",
+        "引导公域流量沉淀至私域社群，支撑后续转化"
+      ],
+      "tags": ["内容策划", "数据分析", "竞品对标", "私域沉淀"],
+      "metrics": [
+        { "value": "40万+", "label": "全平台播放" },
+        { "value": "30+", "label": "内容产出" },
+        { "value": "全平台", "label": "矩阵覆盖" }
+      ]
+    },
+    {
+      "id": "campus-card",
+      "name": "校园卡销售",
+      "period": "2024.09",
+      "role": "团队负责人 / 获客 · 团队管理 · SOP 培训",
+      "media": { "type": "image", "src": "data/web/chatgpt.webp" },
+      "description": "通过短视频引流至私域精准获客，组建并管理推广团队，沉淀标准化转化话术 SOP 并培训推广。",
+      "highlights": [
+        "短视频引流至私域精准获客，单日个人成交 10 单（排名第一）",
+        "组建并管理 20+ 人团队，沉淀 10+ 条转化话术 SOP 并培训推广"
+      ],
+      "tags": ["团队管理", "转化 SOP", "私域获客"],
+      "metrics": [
+        { "value": "10 单", "label": "单日成交" },
+        { "value": "20+", "label": "团队规模" },
+        { "value": "10+", "label": "转化 SOP" }
+      ]
+    }
+  ],
+  "skills": {
+    "groups": [
+      {
+        "category": "产品落地",
+        "items": ["0→1 产品落地", "Coze 工作流编排", "AI 产品落地 SOP", "需求拆解"]
+      },
+      {
+        "category": "AI 能力",
+        "items": ["Prompt 工程", "知识库构建", "多智能体协作", "飞书多维表格", "WorkBuddy + 飞书 CLI"]
+      },
+      {
+        "category": "数据运营",
+        "items": ["运营数据分析", "竞品对标分析", "流程自动化", "Python（Pandas / Numpy）数据处理"]
+      },
+      {
+        "category": "AI 产品方法论",
+        "items": ["多模型定方案 → 需求清单 → AI 初稿 → 评审迭代 → 本地 Agent 计划模式落地"]
+      }
+    ]
+  },
+  "contact": {
+    "phone": "17786939495",
+    "email": "2788191560@qq.com",
+    "github": "wWSsaii",
+    "githubUrl": "https://github.com/wWSsaii",
+    "availability": "立即到岗 · 可全职实习 6 个月+"
+  },
+  "footer": "© 2026 王思羽 · 个人产品展示 · Built with GitHub Pages"
+}

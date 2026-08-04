@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王思羽 · 个人产品展示</title>
+  <meta name="description" content="王思羽 · AI 产品运营 / AI 产品助理 个人产品展示 —— AI 工作流落地、产品 0→1 搭建、数据驱动运营。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__brand" href="#hero" data-scroll>王思羽<span class="nav__brand-dot">.</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links" id="navLinks">
+        <a href="#hero" data-scroll>简介</a>
+        <a href="#projects" data-scroll>项目</a>
+        <a href="#skills" data-scroll>技能</a>
+        <a href="#contact" data-scroll>联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 个人简介 / Hero -->
+    <section id="hero" class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__inner" id="heroContent"><!-- JS 渲染 --></div>
+      <a class="hero__scroll" href="#projects" data-scroll aria-label="向下滚动">
+        <span class="hero__scroll-dot"></span>
+      </a>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__kicker">PROJECTS</span>
+          <h2 class="section__title">项目展示</h2>
+          <p class="section__sub">从 AI 智能体到 0→1 校园产品，覆盖工作流落地与增长运营。</p>
+        </header>
+        <div class="projects__grid" id="projectsGrid"><!-- JS 渲染 --></div>
+      </div>
+    </section>
+
+    <!-- 技能亮点 -->
+    <section id="skills" class="section section--alt">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__kicker">SKILLS</span>
+          <h2 class="section__title">技能亮点</h2>
+          <p class="section__sub">产品落地 · AI 能力 · 数据运营 · 方法论 四位一体。</p>
+        </header>
+        <div class="skills__grid" id="skillsGrid"><!-- JS 渲染 --></div>
+      </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="section">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__kicker">CONTACT</span>
+          <h2 class="section__title">联系方式</h2>
+          <p class="section__sub">欢迎就 AI 产品 / 实习机会与我交流。</p>
+        </header>
+        <div id="contactWrap"><!-- JS 渲染 --></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"><!-- JS 渲染 --></footer>
+
+  <!-- 灯箱 -->
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true">
+    <div class="lightbox__backdrop" data-close></div>
+    <div class="lightbox__panel" role="dialog" aria-modal="true">
+      <button class="lightbox__close" data-close aria-label="关闭">&times;</button>
+      <div class="lightbox__stage" id="lightboxStage"></div>
+      <div class="lightbox__bar" id="lightboxBar"></div>
+    </div>
+  </div>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
