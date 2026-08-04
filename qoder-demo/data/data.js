@@ -130,7 +130,8 @@ window.PORTFOLIO_DATA = {
           { "src": "data/web/campus-10.webp", "alt": "网课卡 · 次卡会员" },
           { "src": "data/web/campus-03.webp", "alt": "零食团购 · 电商变现层" },
           { "src": "data/web/campus-01.webp", "alt": "流量卡办理 · 电商变现层" },
-          { "src": "data/web/campus-11.webp", "alt": "龙昆南美食 · 本地生活" }
+          { "src": "data/web/campus-11.webp", "alt": "龙昆南美食 · 本地生活" },
+          { "src": "data/web/campus-12.webp", "alt": "抽奖兑奖活动 · 用户增长运营" }
         ]
       }
     },
