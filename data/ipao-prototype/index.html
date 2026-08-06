@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>i跑校园 · 交互原型</title>
+  <style>
+    :root {
+      --primary: #4cd964;
+      --orange: #ff9500;
+      --red: #ff3b30;
+      --blue: #007aff;
+      --text: #1c1c1e;
+      --text-sub: #8e8e93;
+      --bg: #f2f3f5;
+      --card: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #e0e5ec 0%, #c8d0e0 100%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 16px;
+      min-height: 100vh;
+    }
+    .prototype-label {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .phone {
+      width: 100%;
+      max-width: 390px;
+      background: #000;
+      border-radius: 44px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+      overflow: hidden;
+      position: relative;
+      padding: 10px;
+    }
+    .screen-inner {
+      background: #fff;
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      min-height: 760px;
+    }
+    .page {
+      display: none;
+      width: 100%;
+      position: relative;
+    }
+    .page.active {
+      display: block;
+      animation: slideIn 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .screen { position: relative; width: 100%; }
+    .screen img { display: block; width: 100%; height: auto; }
+    .hotspots { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .hotspots a {
+      position: absolute;
+      display: block;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .hotspots a:hover { background: rgba(0,122,255,0.08); }
+    .hotspots a:active { background: rgba(0,0,0,0.12); }
+
+    /* 新增页面通用样式 */
+    .new-page { background: var(--bg); min-height: 760px; padding-bottom: 120px; }
+    .np-header {
+      background: var(--card);
+      padding: 50px 16px 12px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .np-back {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .np-title { flex: 1; text-align: center; font-size: 17px; font-weight: 600; color: var(--text); margin-right: 40px; }
+    .np-card { background: var(--card); border-radius: 16px; margin: 12px 12px 0; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .np-label { font-size: 14px; color: var(--text); font-weight: 500; margin-bottom: 10px; }
+    .np-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .np-chip {
+      padding: 8px 16px;
+      border-radius: 18px;
+      background: #f2f3f5;
+      color: var(--text);
+      font-size: 13px;
+      border: 1px solid transparent;
+    }
+    .np-chip.active { background: #e6f9ec; color: #27ae60; border-color: #27ae60; }
+    .np-input-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #f2f3f5;
+    }
+    .np-input-row:last-child { border-bottom: none; }
+    .np-input-icon { width: 28px; font-size: 18px; text-align: center; margin-right: 10px; }
+    .np-input-label { font-size: 14px; color: var(--text); width: 80px; }
+    .np-input { flex: 1; border: none; font-size: 14px; color: var(--text); outline: none; background: transparent; }
+    .np-input::placeholder { color: #c7c7cc; }
+    .np-textarea {
+      width: 100%;
+      border: none;
+      background: #f2f3f5;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      min-height: 90px;
+      resize: none;
+      outline: none;
+    }
+    .np-btn-fixed {
+      position: fixed;
+      bottom: 26px;
+      left: 22px;
+      right: 22px;
+      max-width: 346px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      border-radius: 26px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(39,174,96,0.3);
+      z-index: 100;
+    }
+    .np-btn-fixed.orange { background: linear-gradient(135deg, #ff9f43 0%, #ff7b00 100%); box-shadow: 0 8px 20px rgba(255,123,0,0.3); }
+    .np-btn-fixed.dark { background: #1c1c1e; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+
+    /* 需求详情 */
+    .status-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; font-size: 13px; color: var(--text-sub); background: var(--card); }
+    .route-card { display: flex; align-items: center; gap: 12px; }
+    .route-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; font-weight: 600; }
+    .route-dot.start { background: var(--primary); }
+    .route-dot.end { background: #ff3b30; }
+    .route-info { flex: 1; }
+    .route-loc { font-size: 15px; font-weight: 600; color: var(--text); }
+    .route-addr { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+    .reward-tag { background: #fff5e6; color: var(--orange); padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: 600; }
+    .info-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; }
+    .info-row .l { color: var(--text-sub); }
+    .info-row .r { color: var(--text); font-weight: 500; }
+
+    /* 支付成功 */
+    .pay-success { text-align: center; padding: 60px 20px 30px; }
+    .pay-icon { width: 80px; height: 80px; background: #e6f9ec; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px; color: #27ae60; }
+    .pay-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .pay-amount { font-size: 32px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .pay-amount small { font-size: 18px; }
+    .pay-desc { font-size: 13px; color: var(--text-sub); }
+    .pay-actions { display: flex; gap: 12px; padding: 0 20px; }
+    .pay-actions a { flex: 1; text-align: center; padding: 13px; border-radius: 22px; font-size: 15px; text-decoration: none; font-weight: 500; }
+    .pay-actions .primary { background: var(--primary); color: #fff; }
+    .pay-actions .ghost { background: #fff; color: var(--text); border: 1px solid #e5e5ea; }
+
+    /* 订单列表 */
+    .order-tabs { display: flex; background: var(--card); padding: 8px 12px; position: sticky; top: 0; z-index: 50; }
+    .order-tab { flex: 1; text-align: center; padding: 10px; font-size: 14px; color: var(--text-sub); position: relative; }
+    .order-tab.active { color: var(--text); font-weight: 600; }
+    .order-tab.active::after { content: ''; position: absolute; bottom: 0; left: 30%; right: 30%; height: 3px; background: var(--primary); border-radius: 2px; }
+    .order-card { background: var(--card); border-radius: 16px; margin: 12px; padding: 14px; }
+    .order-head { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .order-type { background: #e6f9ec; color: #27ae60; font-size: 12px; padding: 3px 8px; border-radius: 8px; }
+    .order-status { font-size: 13px; color: var(--orange); font-weight: 500; }
+    .order-route { display: flex; gap: 8px; margin-bottom: 10px; font-size: 14px; }
+    .order-route .dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; flex-shrink: 0; }
+    .order-route .dot.green { background: var(--primary); }
+    .order-route .dot.red { background: #ff3b30; }
+    .order-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-sub); }
+    .order-price { color: #ff3b30; font-size: 16px; font-weight: 700; }
+
+    /* 个人中心 */
+    .profile-top { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); padding: 60px 20px 30px; color: #fff; }
+    .profile-user { display: flex; align-items: center; gap: 14px; }
+    .profile-avatar { width: 64px; height: 64px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .profile-name { font-size: 20px; font-weight: 700; }
+    .profile-id { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+    .profile-stats { display: flex; margin-top: 20px; }
+    .profile-stat { flex: 1; text-align: center; }
+    .profile-stat .v { font-size: 20px; font-weight: 700; }
+    .profile-stat .l { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+    .menu-list { background: var(--card); border-radius: 16px; margin: 12px; overflow: hidden; }
+    .menu-item { display: flex; align-items: center; padding: 16px; border-bottom: 1px solid #f2f3f5; text-decoration: none; color: var(--text); font-size: 15px; }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-icon { width: 28px; margin-right: 10px; font-size: 18px; }
+    .menu-arrow { margin-left: auto; color: #c7c7cc; }
+
+    @media (min-width: 450px) {
+      body { align-items: center; }
+      .phone { margin: 20px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="prototype-label">i跑校园 · 可点击原型</div>
+
+  <div class="phone">
+    <div class="screen-inner">
+
+      <!-- 1. 首页 -->
+      <div class="page active" id="home">
+        <div class="screen">
+          <img src="i跑校园_首页.jpg" alt="首页">
+          <div class="hotspots">
+            <!-- 第一行服务 -->
+            <a href="#express-publish" style="top:30%;left:2%;width:31%;height:14%" title="快递代取(桂)"></a>
+            <a href="#pickup-service" style="top:30%;left:34%;width:31%;height:14%" title="互帮互助"></a>
+            <a href="#express-publish" style="top:30%;left:67%;width:31%;height:14%" title="快递代取(南)"></a>
+            <!-- 第二行 -->
+            <a href="#skill-wall" style="top:44%;left:2%;width:23%;height:14%" title="技能墙"></a>
+            <a href="#task-hall" style="top:44%;left:26%;width:23%;height:14%" title="跑腿代办"></a>
+            <a href="#publish" style="top:44%;left:50%;width:23%;height:14%" title="万能任务"></a>
+            <a href="#publish" style="top:44%;left:74%;width:23%;height:14%" title="代替服务"></a>
+            <!-- 第三行 -->
+            <a href="#circle" style="top:58%;left:2%;width:23%;height:14%" title="抽奖"></a>
+            <a href="#course-proxy" style="top:58%;left:26%;width:23%;height:14%" title="使用教程"></a>
+            <a href="#snacks" style="top:58%;left:50%;width:23%;height:14%" title="零食好物"></a>
+            <a href="#rental" style="top:58%;left:74%;width:23%;height:14%" title="打印/租车"></a>
+            <!-- 第四行 -->
+            <a href="#flow-card" style="top:72%;left:2%;width:23%;height:14%" title="流量卡办理"></a>
+            <a href="#food" style="top:72%;left:26%;width:23%;height:14%" title="美食"></a>
+            <!-- 底部 Tab -->
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+            <a href="#circle" style="top:90%;left:25%;width:25%;height:10%" title="圈子"></a>
+            <a href="#my-orders" style="top:90%;left:50%;width:25%;height:10%" title="订单"></a>
+            <a href="#profile" style="top:90%;left:75%;width:25%;height:10%" title="我的"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 圈子 -->
+      <div class="page" id="circle">
+        <div class="screen">
+          <img src="i跑校园.jpg" alt="圈子">
+          <div class="hotspots">
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+            <a href="#circle" style="top:90%;left:25%;width:25%;height:10%" title="圈子"></a>
+            <a href="#my-orders" style="top:90%;left:50%;width:25%;height:10%" title="订单"></a>
+            <a href="#profile" style="top:90%;left:75%;width:25%;height:10%" title="我的"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 流量卡办理 -->
+      <div class="page" id="flow-card">
+        <div class="screen">
+          <img src="i跑校园 (1).jpg" alt="流量卡办理">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:84%;left:70%;width:28%;height:10%" title="立即办理"></a>
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+            <a href="#my-orders" style="top:90%;left:50%;width:25%;height:10%" title="订单"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 网课代刷 -->
+      <div class="page" id="course-proxy">
+        <div class="screen">
+          <img src="i跑校园 (2).jpg" alt="网课代刷">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:82%;left:5%;width:90%;height:12%" title="立即下单"></a>
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. 零食团购 -->
+      <div class="page" id="snacks">
+        <div class="screen">
+          <img src="i跑校园 (3).jpg" alt="零食团购">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:78%;left:65%;width:30%;height:8%" title="加入购物车/下单"></a>
+            <a href="#order-confirm" style="top:88%;left:65%;width:30%;height:8%" title="加入购物车/下单"></a>
+            <a href="#home" style="top:95%;left:0%;width:25%;height:5%" title="首页"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. 接送服务 -->
+      <div class="page" id="pickup-service">
+        <div class="screen">
+          <img src="i跑校园 (4).jpg" alt="接送服务">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:84%;left:5%;width:90%;height:12%" title="发布需求"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. 技能墙 -->
+      <div class="page" id="skill-wall">
+        <div class="screen">
+          <img src="i跑校园 (5).jpg" alt="技能墙">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#nail-order" style="top:38%;left:6%;width:24%;height:16%" title="宿舍美甲"></a>
+            <a href="#game-order" style="top:38%;left:38%;width:24%;height:16%" title="王者陪练"></a>
+            <a href="#rental" style="top:38%;left:70%;width:24%;height:16%" title="租车"></a>
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. 宿舍美甲下单 -->
+      <div class="page" id="nail-order">
+        <div class="screen">
+          <img src="i跑校园 (6).jpg" alt="宿舍美甲下单">
+          <div class="hotspots">
+            <a href="#skill-wall" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:86%;left:5%;width:90%;height:10%" title="立即下单"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. 游戏陪练下单 -->
+      <div class="page" id="game-order">
+        <div class="screen">
+          <img src="i跑校园 (7).jpg" alt="游戏陪练下单">
+          <div class="hotspots">
+            <a href="#skill-wall" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:86%;left:5%;width:90%;height:10%" title="立即下单"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. 租车 -->
+      <div class="page" id="rental">
+        <div class="screen">
+          <img src="i跑校园 (8).jpg" alt="租车">
+          <div class="hotspots">
+            <a href="#skill-wall" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:86%;left:5%;width:90%;height:10%" title="立即下单"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. 任务大厅 -->
+      <div class="page" id="task-hall">
+        <div class="screen">
+          <img src="i跑校园 (9).jpg" alt="任务大厅">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#complete" style="top:24%;left:5%;width:90%;height:22%" title="任务卡片"></a>
+            <a href="#complete" style="top:50%;left:5%;width:90%;height:22%" title="任务卡片"></a>
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. 网课卡购买 -->
+      <div class="page" id="course-card">
+        <div class="screen">
+          <img src="i跑校园 (10).jpg" alt="网课卡购买">
+          <div class="hotspots">
+            <a href="#course-proxy" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#payment-success" style="top:86%;left:65%;width:30%;height:10%" title="立即支付"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. 龙昆南美食 -->
+      <div class="page" id="food">
+        <div class="screen">
+          <img src="i跑校园 (11).jpg" alt="龙昆南美食">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:26%;left:6%;width:22%;height:14%" title="商家入口"></a>
+            <a href="#home" style="top:90%;left:0%;width:25%;height:10%" title="首页"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. 确认订单 -->
+      <div class="page" id="order-confirm">
+        <div class="screen">
+          <img src="i跑校园 (12).jpg" alt="确认订单">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#payment-success" style="top:86%;left:55%;width:40%;height:10%" title="立即付款"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. 聊天/订单消息 -->
+      <div class="page" id="chat">
+        <div class="screen">
+          <img src="i跑校园 (13).jpg" alt="聊天">
+          <div class="hotspots">
+            <a href="#my-orders" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#complete" style="top:58%;left:5%;width:90%;height:16%" title="代取快递订单卡片"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 16. 待确认完成 -->
+      <div class="page" id="complete">
+        <div class="screen">
+          <img src="i跑校园 (14).jpg" alt="待确认完成">
+          <div class="hotspots">
+            <a href="#my-orders" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#my-orders" style="top:88%;left:5%;width:90%;height:8%" title="确认完成"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. 快递代取(桂) -->
+      <div class="page" id="express-publish">
+        <div class="screen">
+          <img src="i跑校园 (15).jpg" alt="快递代取(桂)">
+          <div class="hotspots">
+            <a href="#home" style="top:0%;left:0%;width:15%;height:10%" title="返回"></a>
+            <a href="#order-confirm" style="top:86%;left:5%;width:90%;height:10%" title="发布任务"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 18. 发布需求（新增） -->
+      <div class="page new-page" id="publish">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>🔋 100%</span>
+        </div>
+        <div class="np-header">
+          <a class="np-back" href="#home">‹</a>
+          <div class="np-title">发布需求</div>
+        </div>
+
+        <div class="np-card">
+          <div class="np-label">选择服务类型</div>
+          <div class="np-chips">
+            <div class="np-chip active">万能任务</div>
+            <div class="np-chip">代替服务</div>
+            <div class="np-chip">互帮互助</div>
+            <div class="np-chip">跑腿代办</div>
+            <div class="np-chip">其他</div>
+          </div>
+        </div>
+
+        <div class="np-card">
+          <div class="np-input-row">
+            <span class="np-input-icon">📍</span>
+            <span class="np-input-label">取货地</span>
+            <input class="np-input" placeholder="请输入取货地点" value="桂林洋菜鸟驿站">
+          </div>
+          <div class="np-input-row">
+            <span class="np-input-icon">🏁</span>
+            <span class="np-input-label">送达地</span>
+            <input class="np-input" placeholder="请输入送达地点" value="桂林洋校区-7栋">
+          </div>
+        </div>
+
+        <div class="np-card">
+          <div class="np-input-row">
+            <span class="np-input-icon">💰</span>
+            <span class="np-input-label">赏金</span>
+            <input class="np-input" placeholder="请输入赏金金额" value="¥ 3.5">
+          </div>
+          <div class="np-input-row">
+            <span class="np-input-icon">⏰</span>
+            <span class="np-input-label">截止时间</span>
+            <input class="np-input" placeholder="请选择截止时间" value="今天 18:00">
+          </div>
+        </div>
+
+        <div class="np-card">
+          <div class="np-label">需求描述</div>
+          <textarea class="np-textarea" placeholder="请详细描述你的需求，方便接单员理解…">小件快递，送到宿舍楼下即可，不用送上楼。</textarea>
+        </div>
+
+        <a href="#publish-detail" class="np-btn-fixed">发布需求</a>
+      </div>
+
+      <!-- 19. 需求详情（新增） -->
+      <div class="page new-page" id="publish-detail">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>🔋 100%</span>
+        </div>
+        <div class="np-header">
+          <a class="np-back" href="#publish">‹</a>
+          <div class="np-title">需求详情</div>
+        </div>
+
+        <div class="np-card route-card">
+          <div class="route-dot start">起</div>
+          <div class="route-info">
+            <div class="route-loc">桂林洋菜鸟驿站</div>
+            <div class="route-addr">待接单员取货</div>
+          </div>
+          <div class="reward-tag">赏金 ¥3.5</div>
+        </div>
+
+        <div class="np-card route-card">
+          <div class="route-dot end">终</div>
+          <div class="route-info">
+            <div class="route-loc">桂林洋校区-7栋</div>
+            <div class="route-addr">送到楼下即可</div>
+          </div>
+        </div>
+
+        <div class="np-card">
+          <div class="info-row"><span class="l">需求状态</span><span class="r" style="color:var(--orange)">待接单</span></div>
+          <div class="info-row"><span class="l">截止时间</span><span class="r">今天 18:00</span></div>
+          <div class="info-row"><span class="l">物品描述</span><span class="r">小件快递</span></div>
+          <div class="info-row"><span class="l">备注</span><span class="r">不用送上楼</span></div>
+        </div>
+
+        <a href="#order-confirm" class="np-btn-fixed orange">立即接单 / 去支付</a>
+      </div>
+
+      <!-- 20. 支付成功（新增） -->
+      <div class="page new-page" id="payment-success">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>🔋 100%</span>
+        </div>
+        <div class="np-header">
+          <a class="np-back" href="#order-confirm">‹</a>
+          <div class="np-title">支付结果</div>
+        </div>
+
+        <div class="pay-success">
+          <div class="pay-icon">✓</div>
+          <div class="pay-title">支付成功</div>
+          <div class="pay-amount"><small>¥</small>3.50</div>
+          <div class="pay-desc">接单员接单后将与你联系，请保持手机畅通</div>
+        </div>
+
+        <div class="pay-actions">
+          <a href="#home" class="ghost">返回首页</a>
+          <a href="#my-orders" class="primary">查看订单</a>
+        </div>
+      </div>
+
+      <!-- 21. 我的订单（新增） -->
+      <div class="page new-page" id="my-orders">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>🔋 100%</span>
+        </div>
+        <div class="np-header">
+          <a class="np-back" href="#home">‹</a>
+          <div class="np-title">我的订单</div>
+        </div>
+
+        <div class="order-tabs">
+          <div class="order-tab active">全部</div>
+          <div class="order-tab">进行中</div>
+          <div class="order-tab">已完成</div>
+        </div>
+
+        <a href="#chat" style="text-decoration:none;color:inherit;display:block;">
+          <div class="order-card">
+            <div class="order-head">
+              <span class="order-type">代取快递（桂）</span>
+              <span class="order-status">进行中</span>
+            </div>
+            <div class="order-route">
+              <span class="dot green">起</span>
+              <span>桂林洋菜鸟驿站</span>
+            </div>
+            <div class="order-route">
+              <span class="dot red">终</span>
+              <span>桂林洋校区-7栋</span>
+            </div>
+            <div class="order-meta">
+              <span>2024-10-18 11:30</span>
+              <span class="order-price">¥3.50</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#complete" style="text-decoration:none;color:inherit;display:block;">
+          <div class="order-card">
+            <div class="order-head">
+              <span class="order-type">代取快递（南）</span>
+              <span class="order-status" style="color:#999">待确认</span>
+            </div>
+            <div class="order-route">
+              <span class="dot green">起</span>
+              <span>龙昆南快递点</span>
+            </div>
+            <div class="order-route">
+              <span class="dot red">终</span>
+              <span>金鹏6楼-603</span>
+            </div>
+            <div class="order-meta">
+              <span>2024-10-18 09:15</span>
+              <span class="order-price">¥1.00</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#home" class="np-btn-fixed dark" style="bottom:26px">再去发一单</a>
+      </div>
+
+      <!-- 22. 我的（新增） -->
+      <div class="page new-page" id="profile">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>🔋 100%</span>
+        </div>
+        <div class="profile-top">
+          <div class="profile-user">
+            <div class="profile-avatar">🐱</div>
+            <div>
+              <div class="profile-name">默认昵称 001</div>
+              <div class="profile-id">ID: 2788191560</div>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="profile-stat"><div class="v">12</div><div class="l">发布订单</div></div>
+            <div class="profile-stat"><div class="v">8</div><div class="l">完成订单</div></div>
+            <div class="profile-stat"><div class="v">¥28</div><div class="l">累计赏金</div></div>
+          </div>
+        </div>
+
+        <div class="menu-list">
+          <a href="#my-orders" class="menu-item"><span class="menu-icon">📋</span>我的订单<span class="menu-arrow">›</span></a>
+          <a href="#task-hall" class="menu-item"><span class="menu-icon">🏃</span>接单大厅<span class="menu-arrow">›</span></a>
+          <a href="#" class="menu-item"><span class="menu-icon">💳</span>我的钱包<span class="menu-arrow">›</span></a>
+          <a href="#" class="menu-item"><span class="menu-icon">📍</span>地址管理<span class="menu-arrow">›</span></a>
+        </div>
+
+        <div class="menu-list">
+          <a href="#" class="menu-item"><span class="menu-icon">⚙️</span>设置<span class="menu-arrow">›</span></a>
+          <a href="#" class="menu-item"><span class="menu-icon">🎧</span>联系客服<span class="menu-arrow">›</span></a>
+        </div>
+
+        <a href="#home" class="np-btn-fixed dark">返回首页</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showPage(hash) {
+      const id = (hash || '#home').replace('#', '') || 'home';
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.getElementById('home').classList.add('active');
+      }
+    }
+
+    document.querySelectorAll('.hotspots a, .np-back, .np-btn-fixed, .pay-actions a, .menu-item').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          history.pushState(null, null, href);
+          showPage(href);
+        }
+      });
+    });
+
+    window.addEventListener('popstate', () => showPage(location.hash));
+    showPage(location.hash);
+  </script>
+</body>
+</html>
