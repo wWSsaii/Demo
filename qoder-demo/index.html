@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>王思羽 · AI 产品助理 | 个人作品集</title>
-<meta name="description" content="王思羽，海南师范大学数据科学在读，AI 产品助理。AI 工作流落地 + 产品 0→1 搭建 + 数据驱动运营复合能力。">
+<title>王思羽 · 个人作品集 | AI 应用 × 产品 × 增长</title>
+<meta name="description" content="王思羽，海南师范大学数据科学在读。个人作品集：产品 0→1 搭建、用户增长运营与 AI 应用落地实践。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='44' font-size='34' font-family='PingFang SC,Microsoft YaHei,sans-serif' fill='white' text-anchor='middle'%3E%E6%80%9D%3C/text%3E%3C/svg%3E">
 <style>
 /* ============ Design Tokens ============ */
@@ -99,7 +99,7 @@ section{position:relative}
 .hero-role .role-sub{font-size:14.5px;color:var(--ink-3);font-weight:500}
 .hero-tag{color:var(--ink-3);font-size:16px;max-width:560px}
 .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:14px;font-size:15px;font-weight:600;transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:14px;font-size:15px;font-weight:600;transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap;cursor:pointer;border:none;font-family:inherit;line-height:1.4}
 .btn svg{width:16px;height:16px}
 .btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 24px rgba(37,99,235,.32)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(37,99,235,.4)}
@@ -181,6 +181,14 @@ section{position:relative}
 .p-hl{display:flex;gap:11px;font-size:13.8px;color:var(--ink-2);line-height:1.72}
 .p-hl .hl-dot{flex:none;width:20px;height:20px;border-radius:7px;background:var(--blue-tint);color:var(--blue);display:grid;place-items:center;margin-top:2px}
 .p-hl .hl-dot svg{width:11px;height:11px}
+.p-hl .hl-dot.star-dot{color:#fff;font-size:11px;font-weight:800;background:var(--blue)}
+.p-hl .hl-dot.star-dot.dT{background:#0ea5e9}
+.p-hl .hl-dot.star-dot.dA{background:#8b5cf6}
+.p-hl .hl-dot.star-dot.dR{background:#10b981}
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,16px);background:rgba(15,23,42,.92);color:#fff;font-size:13px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.35s;z-index:999}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.c-card[data-copy]{cursor:pointer}
+.c-card[data-copy]:focus-visible{outline:2px solid rgba(255,255,255,.7);outline-offset:2px}
 .p-hl b{color:var(--ink);font-weight:700}
 .p-metrics{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
 .p-metric{flex:1;min-width:92px;background:var(--grad-soft);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:center}
@@ -347,7 +355,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
   <div class="nav-inner">
     <a class="nav-logo" href="#home">
       <span class="logo-mark">思</span>
-      <span>王思羽<small>AI PRODUCT ASSISTANT</small></span>
+      <span>王思羽<small>AI · PRODUCT · GROWTH</small></span>
     </a>
     <ul class="nav-links" id="navLinks"></ul>
     <a class="nav-cta" href="#contact">
@@ -389,7 +397,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
           <img id="heroAvatar" src="data/web/avatar.webp" alt="王思羽" loading="eager">
           <div class="avatar-tag t1">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-            <span>Coze <b>11节点</b> 工作流</span>
+            <span>0→1 产品 <b>落地</b></span>
           </div>
           <div class="avatar-tag t2">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
@@ -415,7 +423,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
     <div class="section-head reveal">
       <span class="section-kicker">ABOUT ME</span>
       <h2 class="section-title">关于我</h2>
-      <p class="section-sub">AI 工作流落地 × 产品 0→1 搭建 × 数据驱动运营 —— 复合型 AI 产品助理，用可量化的结果说话。</p>
+      <p class="section-sub">产品 0→1 搭建 × 增长运营 × AI 应用落地 —— 用可量化的结果说话。</p>
     </div>
     <div class="about-grid">
       <div class="card reveal" style="--d:.05s">
@@ -449,7 +457,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
     <div class="section-head reveal">
       <span class="section-kicker">PROJECTS</span>
       <h2 class="section-title">项目经历</h2>
-      <p class="section-sub">从 AI 智能体到校园产品 0→1，每一个项目都有明确的痛点、打法与可验证的结果。</p>
+      <p class="section-sub">每个项目均按 STAR 法则（情境 / 任务 / 行动 / 结果）呈现，从痛点洞察到量化成果一以贯之。</p>
     </div>
     <div id="projectList"></div>
   </div>
@@ -476,14 +484,14 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
         <div class="c-sub" id="contactNote"></div>
         <div class="contact-cards" id="contactCards"></div>
         <div class="contact-cta">
-          <a class="btn btn-light" href="mailto:2788191560@qq.com">
+          <button type="button" class="btn btn-light" data-copy="RURBFUBWVVBEHXJBQxgUHBQ=">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-            发送邮件
-          </a>
-          <a class="btn btn-glass" href="tel:17786939495">
+            复制邮箱
+          </button>
+          <button type="button" class="btn btn-glass" data-copy="RkROFUdWV1xGFAc=">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            拨打电话
-          </a>
+            复制电话
+          </button>
         </div>
       </div>
     </div>
@@ -492,7 +500,7 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
 
 <footer>
   <div class="wrap footer-inner">
-    <div class="footer-brand"><span class="logo-mark">思</span>王思羽 · AI 产品助理</div>
+    <div class="footer-brand"><span class="logo-mark">思</span>王思羽 · 个人作品集</div>
     <div class="footer-meta">纯原生 HTML/CSS/JS 构建 · 数据驱动渲染 · © 2026 王思羽</div>
   </div>
 </footer>
@@ -512,24 +520,30 @@ footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:34px 0
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-panel" id="mobilePanel"></div>
 </div>
+
+<div id="toast" role="status" aria-live="polite"></div>
 <script>
 /* ============================================================
  * 王思羽 · 个人产品展示 Demo —— 数据源文件
- * 所有内容均以简历《王思羽-AI 产品助理-立即到岗实习6+个月》为准
+ * 通用能力展示（不绑定具体岗位）：产品 0→1 × 用户增长 × AI 应用
+ * 项目介绍均按 STAR 法则（情境/任务/行动/结果）组织
  * 修改此文件后，运行 `python scripts/build.py` 重新生成单文件 index.html
+ * 注意：联系方式以脱敏形式展示，完整信息经 XOR+Base64 编码存储（页面点击复制）
  * ============================================================ */
 window.PORTFOLIO_DATA = {
   "meta": {
     "name": "王思羽",
-    "role": "AI 产品助理",
-    "roleEn": "AI Product Assistant",
-    "roleTag": "AI 应用方向 · 产品运营",
-    "tagline": "以「AI 工作流落地 + 产品 0→1 搭建 + 数据驱动运营」复合能力，独立完成痛点洞察 → 需求拆解 → AI 方案设计 → 上线迭代全流程。",
+    "role": "AI 应用 × 产品 0→1 × 用户增长",
+    "roleEn": "AI Application · Product · Growth",
+    "roleTag": "从痛点洞察到上线迭代，用可量化的结果说话",
+    "tagline": "以「0→1 产品搭建 + 增长运营 + AI 应用落地」复合能力，独立完成痛点洞察 → 方案设计 → 上线迭代 → 数据复盘全流程。",
     "avatar": "data/web/avatar.webp",
     "status": "立即到岗 · 可全职实习 6 个月+",
     "statusType": "available",
-    "phone": "17786939495",
-    "email": "2788191560@qq.com",
+    "phone": "177****9495",
+    "phoneSecret": "RkROFUdWV1xGFAc=",
+    "email": "278***@qq.com",
+    "emailSecret": "RURBFUBWVVBEHXJBQxgUHBQ=",
     "age": "22岁",
     "github": "https://github.com/wWSsaii",
     "githubText": "github.com/wWSsaii",
@@ -550,23 +564,23 @@ window.PORTFOLIO_DATA = {
     "courses": ["机器学习", "自然语言处理（NLP）", "数据可视化", "Python", "SQL"]
   },
 
-  "summary": "具备「AI 工作流落地 + 产品 0→1 搭建 + 数据驱动运营」复合能力，可独立完成痛点洞察→需求拆解→AI 方案设计→上线迭代全流程。熟练运用 Coze、Prompt 工程、多智能体协作、知识库搭建，落地可量化 AI 提效成果（11 节点自动化工作流、120 份知识文档、30 万+ 播放内容分析）。拥有用户增长与商业化实战经验，沉淀 500+ 注册用户、40 万+ 内容播放、10+ 商家合作，擅长内容获客 + 私域沉淀赋能产品迭代。",
+  "summary": "具备「0→1 产品搭建 × 增长运营 × AI 应用落地」复合能力：独立主导校园综合服务小程序从痛点洞察到上线迭代全链路，沉淀 500+ 注册用户、3000+ 元平台交易额；积累 40 万+ 播放的内容获客方法论与 10+ 商家合作资源；熟悉智能体、AI 工作流等应用工具，擅长把重复劳动交给 AI、让每个决策有数据支撑。",
 
   "capabilities": [
     {
-      "icon": "workflow",
-      "title": "AI 工作流落地",
-      "desc": "熟练运用 Coze、Prompt 工程、多智能体协作与知识库搭建，落地 11 节点自动化工作流、120 份知识文档等可量化提效成果，形成「开源参考 → 多 Agent 协同 → 人工校验 → 平台部署」标准化 SOP。"
-    },
-    {
       "icon": "product",
       "title": "产品 0→1 搭建",
-      "desc": "独立主导校园综合服务小程序从痛点洞察、三层业务结构设计到上线迭代全链路，沉淀 500+ 注册用户、60+ 接单员，跑通「内容获客 → 社群留存 → 平台交易」增长闭环。"
+      "desc": "独立主导校园综合服务小程序从痛点洞察、业务结构设计到上线迭代全链路，沉淀 500+ 注册用户、60+ 接单员，跑通「内容获客 → 社群留存 → 平台交易」增长闭环。"
     },
     {
-      "icon": "data",
-      "title": "数据驱动运营",
-      "desc": "40 万+ 内容播放的后台复盘归因，17 项标准字段入库支撑选题决策；短视频引流 + 私域社群沉淀，赋能产品迭代与商业化合作（10+ 商家资源置换）。"
+      "icon": "growth",
+      "title": "增长与内容运营",
+      "desc": "40 万+ 内容播放的后台复盘归因，支撑选题决策；短视频引流 + 私域社群沉淀，赋能产品迭代与商业化合作（10+ 商家流量互推、资源置换）。"
+    },
+    {
+      "icon": "ai",
+      "title": "AI 应用落地",
+      "desc": "熟悉智能体、AI 工作流、知识库等应用工具，将竞品分析、文档整理等重复劳动自动化，输出标准化结果支撑业务决策，形成「多模型定方案 → 标准化 SOP」方法论。"
     }
   ],
 
@@ -584,13 +598,15 @@ window.PORTFOLIO_DATA = {
       "id": "haixiaozhi",
       "name": "海小智",
       "subtitle": "新生入学导航 AI 问答智能体",
-      "role": "创建者 · 需求分析/知识库运营/部署跟进",
+      "role": "创建者 · 需求分析/产品设计/落地跟进",
       "period": "2026.07",
-      "tags": ["AI 智能体", "Coze", "知识库构建", "Prompt 工程"],
-      "summary": "新生入学面临大量重复咨询（宿舍/食堂/教务等），人工解答效率低。设计 10 大类分层知识库架构，打造可对话、可导航的入学助手。",
-      "highlights": [
-        { "title": "知识库运营", "text": "借助元宝对接微信生态 + IMA Claw 采集，多智能体协作批量生产分类知识文档，统一 Prompt 约束输出规范，沉淀「开源参考 → 多 Agent 协同 → 人工校验 → 平台部署」标准化 SOP；累计生成 120 份分类 Markdown 文档，沉淀 75 条结构化 Q&A。" },
-        { "title": "体验优化", "text": "洞察新生入学迷路痛点，用 Python 脚本生成可视化互动地图并部署至 GitHub Pages，接入问答平台，解决纯文本问答无法承载的导航需求。" }
+      "tags": ["AI 智能体", "需求分析", "产品设计", "知识库构建"],
+      "summary": "针对新生入学大量重复咨询的痛点，设计分层知识库 + 问答智能体，并联动可视化地图解决「问路」需求。",
+      "star": [
+        { "k": "S", "t": "情境", "d": "新生入学面临宿舍、食堂、教务等大量重复咨询，人工解答效率低且口径不一。" },
+        { "k": "T", "t": "任务", "d": "打造一个可对话、可导航的新生入学 AI 问答助手，替代人工重复答疑。" },
+        { "k": "A", "t": "行动", "d": "设计 10 大类分层知识库架构，借助 AI 多智能体批量产出规范化知识文档并统一校验；洞察新生「问路」痛点，补充可视化互动地图承载导航需求。" },
+        { "k": "R", "t": "结果", "d": "沉淀 120 份分类知识文档、75 条结构化 Q&A，问答助手与校园互动地图 Demo 上线即可用。" }
       ],
       "metrics": [
         { "v": "120", "suffix": "份", "l": "分类知识文档" },
@@ -621,11 +637,12 @@ window.PORTFOLIO_DATA = {
       "role": "创始人 · 产品规划/用户运营/商务合作",
       "period": "2024.10 – 2025.09",
       "tags": ["0→1 产品", "用户增长", "私域运营", "商务合作"],
-      "summary": "0→1 主导搭建校园综合服务小程序，统筹产品规划、需求迭代、营销推广、用户运营、商务合作全链路。",
-      "highlights": [
-        { "title": "三层业务结构", "text": "按「高频刚需打底、低频高毛利增收」设计——基础流量层（快递代取/论坛交流）、增值服务层（技能墙：宿舍美甲/王者陪练/网课服务）、电商变现层（零食团购/流量卡），构建丰富校园服务生态。" },
-        { "title": "增长运营", "text": "短视频引流至私域社群获取种子用户，对接 10+ 校园周边商家达成流量互推与资源置换合作，跑通「内容获客 → 社群留存 → 平台交易」增长闭环。" },
-        { "title": "技术破局", "text": "探索外链 API 绕开原生限制实现跨小程序跳转；配置飞书 Webhook 机器人实现订单实时推送。" }
+      "summary": "从 0→1 搭建校园综合服务小程序，统筹产品规划、需求迭代、内容获客、用户运营与商务合作全链路。",
+      "star": [
+        { "k": "S", "t": "情境", "d": "校园跑腿、技能、电商等服务需求分散，缺少统一可信的平台承接，学生找人难、交易无保障。" },
+        { "k": "T", "t": "任务", "d": "从 0→1 打造覆盖校园高频刚需的综合服务小程序，并跑通获客与商业化闭环。" },
+        { "k": "A", "t": "行动", "d": "设计「高频刚需打底、低频高毛利增收」三层业务结构（快递代取/论坛、技能墙服务、团购/流量卡）；短视频内容获客 + 私域社群沉淀种子用户；对接 10+ 校园商家达成流量互推与资源置换，并解决跨端跳转、订单实时通知等关键体验问题。" },
+        { "k": "R", "t": "结果", "d": "沉淀 500+ 注册用户、60+ 接单员、3000+ 元平台交易额，跑通「内容获客 → 社群留存 → 平台交易」增长闭环。" }
       ],
       "metrics": [
         { "v": "500", "suffix": "+", "l": "注册用户" },
@@ -652,27 +669,28 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "coze",
-      "name": "Coze 短视频分析自动化工作流",
-      "subtitle": "竞品素材 → 结构化数据，一条链路自动化",
-      "role": "工作流开发者 · 编排/Prompt/数据标准化",
+      "name": "短视频素材分析自动化工作流",
+      "subtitle": "人工 30+ 分钟 → 自动出结构化分析",
+      "role": "工作流设计者 · 流程设计/标准输出/效果跟进",
       "period": "2026.07",
-      "tags": ["Coze", "Prompt 工程", "流程自动化", "飞书多维表格"],
-      "summary": "解决竞品素材人工整理效率低的痛点，打通「视频采集 → ASR 语音转写 → 爆款分析 → 飞书多维表格入库」全链路。",
-      "highlights": [
-        { "title": "流程自动化", "text": "搭建 11 节点 Coze 工作流，打通视频采集、ASR 语音转写、爆款分析、飞书多维表格入库全链路，替代人工整理竞品素材。" },
-        { "title": "Prompt 工程与标准化", "text": "设计前置过滤规则（大模型识别无效视频）降低算力消耗；2 套 Prompt 框架（黄金 3 秒文案改写、爆款多维拆解），输出 17 项标准字段，入库数据直接支撑运营分析与选题决策。" },
-        { "title": "效果跟进", "text": "量化节点耗时（ASR≈22s / 改写≈35s / 分析≈31s）与系统性排错方法论，保障流程稳定运行。" }
+      "tags": ["AI 自动化", "流程提效", "数据分析", "标准输出"],
+      "summary": "把竞品素材人工整理的低效链路改造成全自动分析流程，让运营直接拿到结构化结论。",
+      "star": [
+        { "k": "S", "t": "情境", "d": "运营需人工逐个整理竞品短视频素材，单条耗时 30 分钟以上，且分析标准因人而异。" },
+        { "k": "T", "t": "任务", "d": "搭建「采集 → 转写 → 爆款分析 → 入库」的全自动分析链路，统一输出口径。" },
+        { "k": "A", "t": "行动", "d": "编排 AI 工作流打通全链路，设计统一的爆款分析框架与字段规范，设置前置过滤减少无效计算，输出结果直接对接数据表。" },
+        { "k": "R", "t": "结果", "d": "单条素材分析缩短至 1 分钟内，17 项标准字段直接入库，替代人工整理并支撑选题决策。" }
       ],
       "metrics": [
-        { "v": "11", "suffix": "节点", "l": "全自动链路" },
-        { "v": "2", "suffix": "套", "l": "Prompt 框架" },
-        { "v": "17", "suffix": "项", "l": "标准字段" }
+        { "v": "1", "suffix": "分钟内", "l": "单条分析耗时" },
+        { "v": "17", "suffix": "项", "l": "标准字段入库" },
+        { "v": "100", "suffix": "%", "l": "链路自动化" }
       ],
       "media": {
         "type": "webp",
         "src": "data/web/workflow-demo.webp",
         "poster": "data/web/workflow-poster.webp",
-        "alt": "Coze 短视频分析工作流演示"
+        "alt": "短视频素材分析自动化工作流演示"
       }
     },
     {
@@ -682,11 +700,12 @@ window.PORTFOLIO_DATA = {
       "role": "独立创作者 · 内容策划/数据分析/竞品对标",
       "period": "2024.08 – 至今",
       "tags": ["内容策划", "数据分析", "竞品对标", "私域引流"],
-      "summary": "全平台 40 万+ 播放、产出 30+ 篇内容；依托后台数据复盘内容表现，归因优化选题，持续沉淀可复用的内容框架。",
-      "highlights": [
-        { "title": "数据复盘", "text": "依托平台后台数据复盘内容表现，归因优化选题方向。" },
-        { "title": "竞品对标", "text": "跟踪对标竞品，拆解爆款规律沉淀复用内容框架。" },
-        { "title": "流量转化", "text": "引导公域流量沉淀至私域社群，支撑后续转化与产品导流。" }
+      "summary": "全平台 40 万+ 播放、产出 30+ 篇内容；依托数据复盘归因优化选题，持续沉淀可复用内容框架。",
+      "star": [
+        { "k": "S", "t": "情境", "d": "校园类内容竞争激烈，涨粉慢、流量转化难，选题全凭感觉。" },
+        { "k": "T", "t": "任务", "d": "打造可持续产出的校园 IP 内容模型，并让流量沉淀到私域。" },
+        { "k": "A", "t": "行动", "d": "依托平台后台数据复盘内容表现、归因选题成败；对标竞品拆解爆款规律，沉淀可复用内容框架；公域流量统一引导至私域社群。" },
+        { "k": "R", "t": "结果", "d": "全平台 40 万+ 播放、30+ 篇内容产出，稳定为社群与校园产品导流。" }
       ],
       "metrics": [
         { "v": "40", "suffix": "万+", "l": "全平台播放" },
@@ -707,10 +726,12 @@ window.PORTFOLIO_DATA = {
       "role": "团队负责人 · 组建/培训/转化",
       "period": "2024.09",
       "tags": ["私域获客", "团队管理", "转化 SOP"],
-      "summary": "短视频引流至私域精准获客，单日个人成交 10 单（排名第一）；组建管理 20+ 人团队，沉淀 10+ 条转化话术 SOP 并培训推广。",
-      "highlights": [
-        { "title": "个人战绩", "text": "单日个人成交 10 单，团队内排名第一。" },
-        { "title": "团队管理", "text": "组建并管理 20+ 人团队，沉淀 10+ 条转化话术 SOP，统一培训推广。" }
+      "summary": "短视频引流至私域精准获客，单日个人成交 10 单（团队第一）；组建管理 20+ 人团队并沉淀可复制转化模型。",
+      "star": [
+        { "k": "S", "t": "情境", "d": "开学季办卡需求集中，但学生信任度低、转化效率差，团队缺乏统一打法。" },
+        { "k": "T", "t": "任务", "d": "完成规模化、可复制的成交，并带出一支能打的销售团队。" },
+        { "k": "A", "t": "行动", "d": "短视频引流至私域精准触达目标用户；组建并培训 20+ 人团队，沉淀 10+ 条转化话术 SOP 统一推广。" },
+        { "k": "R", "t": "结果", "d": "单日个人成交 10 单（团队内第一），团队整体跑通可复制成交模型。" }
       ],
       "metrics": [
         { "v": "10", "suffix": "单/日", "l": "个人成交" },
@@ -725,32 +746,32 @@ window.PORTFOLIO_DATA = {
     "steps": [
       { "t": "多模型定方案", "d": "同一需求用多个模型出方案，交叉对比选最优路径，避免单模型盲区。" },
       { "t": "需求清单", "d": "把业务目标拆成可执行的需求清单，明确输入输出与验收标准。" },
-      { "t": "AI 初稿", "d": "Prompt 约束输出规范，AI 批量生成初稿，人工只做评审而非从零撰写。" },
+      { "t": "AI 初稿", "d": "用 AI 批量生成初稿，人工只做评审修正而非从零撰写，效率翻倍。" },
       { "t": "评审迭代", "d": "人工校验质量、修正偏差，多轮迭代直至达标，沉淀可复用模板。" },
-      { "t": "本地 Agent 落地", "d": "计划模式拆解任务，Agent 逐步执行落地，把 SOP 变成自动化。" }
+      { "t": "AI 落地执行", "d": "把方案拆成可执行任务，借助 AI 工具与智能体逐步落地，让 SOP 变成自动化。" }
     ]
   },
 
   "skills": [
     {
-      "group": "AI 产品能力",
-      "items": ["0→1 产品落地", "AI 产品落地 SOP", "Prompt 工程", "需求拆解", "竞品对标分析", "多模型定方案"]
+      "group": "AI 应用与产品",
+      "items": ["0→1 产品落地", "AI 智能体设计", "Coze 工作流编排", "知识库构建", "需求拆解", "多模型定方案"]
     },
     {
-      "group": "工具与自动化",
-      "items": ["Coze 工作流编排", "飞书多维表格", "WorkBuddy + 飞书 CLI", "知识库构建", "流程自动化", "Python（Pandas/Numpy）"]
+      "group": "运营与增长",
+      "items": ["内容获客", "私域运营", "用户增长", "转化话术 SOP", "商务合作", "竞品对标分析"]
     },
     {
-      "group": "运营与数据",
-      "items": ["运营数据分析", "内容获客", "私域运营", "用户增长", "数据驱动迭代", "转化话术 SOP"]
+      "group": "数据与工具",
+      "items": ["运营数据分析", "数据驱动迭代", "飞书多维表格", "短视频数据分析", "Python（Pandas）", "AI 工具链"]
     }
   ],
 
   "contact": {
     "title": "期待与你一起做有数据、有落地、有增长的产品",
     "items": [
-      { "type": "phone", "label": "电话 / 微信", "value": "17786939495", "href": "tel:17786939495" },
-      { "type": "email", "label": "邮箱", "value": "2788191560@qq.com", "href": "mailto:2788191560@qq.com" },
+      { "type": "phone", "label": "电话 / 微信", "value": "177****9495", "secret": "RkROFUdWV1xGFAc=" },
+      { "type": "email", "label": "邮箱", "value": "278***@qq.com", "secret": "RURBFUBWVVBEHXJBQxgUHBQ=" },
       { "type": "github", "label": "GitHub", "value": "github.com/wWSsaii", "href": "https://github.com/wWSsaii", "external": true }
     ],
     "note": "可全职实习 6 个月+ · 立即到岗 · 坐标海南"
@@ -773,7 +794,8 @@ const ICON = {
   code: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
   phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
   mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>',
-  gh: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>'
+  gh: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
+  copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'
 };
 
 /* ============ Render: Nav ============ */
@@ -865,7 +887,8 @@ function projectFull(p, i){
       <div class="p-sub">${p.subtitle}</div>
       <div class="p-tags">${p.tags.map(t => `<span>${t}</span>`).join("")}</div>
       <p class="p-summary">${p.summary}</p>
-      <div class="p-highlights">${p.highlights.map(h => `
+      <div class="p-highlights">${(p.star || []).map(s => `
+        <div class="p-hl"><span class="hl-dot star-dot d${s.k}">${s.k}</span><span><b>${s.t}：</b>${s.d}</span></div>`).join("") || (p.highlights || []).map(h => `
         <div class="p-hl"><span class="hl-dot">${svg(ICON.check)}</span><span><b>${h.title}：</b>${h.text}</span></div>`).join("")}
       </div>
       <div class="p-metrics">${p.metrics.map(mt => `
@@ -937,7 +960,8 @@ function projectCompact(p){
       <div class="p-sub">${p.subtitle}</div>
       <div class="p-tags" style="margin-top:12px">${p.tags.map(t => `<span>${t}</span>`).join("")}</div>
       <p class="p-summary">${p.summary}</p>
-      <div class="p-highlights">${p.highlights.map(h => `
+      <div class="p-highlights">${(p.star || []).map(s => `
+        <div class="p-hl"><span class="hl-dot star-dot d${s.k}">${s.k}</span><span><b>${s.t}：</b>${s.d}</span></div>`).join("") || (p.highlights || []).map(h => `
         <div class="p-hl"><span class="hl-dot">${svg(ICON.check)}</span><span><b>${h.title}：</b>${h.text}</span></div>`).join("")}
       </div>
     </div>
@@ -1005,14 +1029,67 @@ function renderContact(){
   const parts = D.contact.note.split("·");
   $("#contactNote").innerHTML = parts.map((s, i) => i === 0 ? `<span>${s}</span>` : `<span class="pill">${s.trim()}</span>`).join("");
   const icons = { phone: ICON.phone, email: ICON.mail, github: ICON.gh };
-  const hints = { phone: "点击拨打", email: "点击发送邮件", github: "点击访问主页" };
-  $("#contactCards").innerHTML = D.contact.items.map((c, i) => `
+  const hints = { phone: "点击复制", email: "点击复制", github: "点击访问主页" };
+  $("#contactCards").innerHTML = D.contact.items.map((c, i) => c.secret ? `
+    <div class="c-card reveal" style="--d:${i * .08}s" role="button" tabindex="0" data-copy="${c.secret}" aria-label="复制${c.label}">
+      <span class="c-icon">${svg(icons[c.type])}</span>
+      <span class="c-label">${c.label}</span>
+      <div class="c-value">${c.value}</div>
+      <span class="c-copy">${hints[c.type]} ${svg(ICON.copy)}</span>
+    </div>` : `
     <a class="c-card reveal" style="--d:${i * .08}s" href="${c.href}" ${c.external ? 'target="_blank" rel="noopener"' : ""}>
       <span class="c-icon">${svg(icons[c.type])}</span>
       <span class="c-label">${c.label}</span>
       <div class="c-value">${c.value}</div>
       <span class="c-copy">${hints[c.type]} ${svg(ICON.link)}</span>
     </a>`).join("");
+}
+
+/* ============ 联系方式脱敏：XOR+Base64 存储，点击复制完整信息 ============ */
+const COPY_KEY = "wsy-qoder-2026";
+function decodeSecret(s){
+  try{
+    const b = atob(s);
+    let out = "";
+    for(let i = 0; i < b.length; i++){
+      out += String.fromCharCode(b.charCodeAt(i) ^ COPY_KEY.charCodeAt(i % COPY_KEY.length));
+    }
+    return out;
+  }catch(e){ return ""; }
+}
+let toastTimer;
+function showToast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+function copyText(v){
+  if (navigator.clipboard && window.isSecureContext){
+    return navigator.clipboard.writeText(v).then(() => showToast("已复制，可直接粘贴发送"));
+  }
+  const ta = document.createElement("textarea");
+  ta.value = v;
+  ta.style.cssText = "position:fixed;opacity:0";
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand("copy"); showToast("已复制，可直接粘贴发送"); }catch(e){}
+  document.body.removeChild(ta);
+  return Promise.resolve();
+}
+function initCopyCards(){
+  const wrap = $("#contact");
+  wrap.addEventListener("click", (e) => {
+    const card = e.target.closest("[data-copy]");
+    if (!card) return;
+    copyText(decodeSecret(card.dataset.copy));
+  });
+  wrap.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    const card = e.target.closest("[data-copy]");
+    if (card) copyText(decodeSecret(card.dataset.copy));
+  });
 }
 
 /* ============ Interactions ============ */
@@ -1104,6 +1181,7 @@ renderAbout();
 renderProjects();
 renderMethod();
 renderContact();
+initCopyCards();
 initReveal();
 initCounters();
 initNav();
